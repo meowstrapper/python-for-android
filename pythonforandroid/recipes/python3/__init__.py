@@ -54,7 +54,7 @@ class Python3Recipe(TargetPythonRecipe):
         :class:`~pythonforandroid.python.GuestPythonRecipe`
     '''
 
-    version = '3.11.13'
+    version = '3.14.0'
     _p_version = Version(version)
     url = 'https://github.com/python/cpython/archive/refs/tags/v{version}.tar.gz'
     name = 'python3'
@@ -262,7 +262,7 @@ class Python3Recipe(TargetPythonRecipe):
         info('Activating flags for sqlite3')
         recipe = Recipe.get_recipe('sqlite3', self.ctx)
         add_flags(' -I' + recipe.get_build_dir(arch.arch),
-                  ' -L' + recipe.get_lib_dir(arch), ' -lsqlite3')
+                  ' -L' + recipe.get_build_dir(arch.arch), ' -lsqlite3')
 
         info('Activating flags for libffi')
         recipe = Recipe.get_recipe('libffi', self.ctx)
@@ -388,19 +388,12 @@ class Python3Recipe(TargetPythonRecipe):
         copying all the modules and standard library to the right
         place.
         """
-        # Todo: find a better way to find the build libs folder
-        modules_build_dir = join(
+        modules_build_dir = glob.glob(join(
             self.get_build_dir(arch.arch),
             'android-build',
             'build',
-            'lib.{}{}-{}-{}'.format(
-                # android is now supported platform
-                "android" if self._p_version.minor >= 13 else "linux",
-                '2' if self.version[0] == '2' else '',
-                arch.command_prefix.split('-')[0],
-                self.major_minor_version_string
-                ))
-
+            'lib.*'
+        ))[0]
         # Compile to *.pyc the python modules
         self.compile_python_files(modules_build_dir)
         # Compile to *.pyc the standard python library

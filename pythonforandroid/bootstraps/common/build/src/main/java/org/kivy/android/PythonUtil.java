@@ -51,7 +51,7 @@ public class PythonUtil {
             addLibraryIfExists(libsList, name, libsDir);
         }
 
-        for (int v = 5; v <= 14; v++) {
+        for (int v = 14; v >= 5; v--) {
             libsList.add("python3." + v + (v <= 7 ? "m" : ""));
         }
 
@@ -63,6 +63,7 @@ public class PythonUtil {
         boolean foundPython = false;
 
         for (String lib : getLibraries(libsDir)) {
+            if (lib.startsWith("python") && foundPython) {continue;}
             Log.v(TAG, "Loading library: " + lib);
             try {
                 System.loadLibrary(lib);
