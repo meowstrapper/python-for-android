@@ -363,13 +363,11 @@ main.py that loads it.''')
     if args.icon_fg and args.icon_bg:
         shutil.copy(args.icon_fg, join(res_dir, 'mipmap/icon_foreground.png'))
         shutil.copy(args.icon_bg, join(res_dir, 'mipmap/icon_background.png'))
-        shutil.copy(args.icon_adaptive, join(res_dir, 'mipmap/icon_monochrome.png'))
         with open(join(res_dir, 'mipmap-anydpi-v26/icon.xml'), "w") as fd:
             fd.write("""<?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@mipmap/icon_background"/>
     <foreground android:drawable="@mipmap/icon_foreground"/>
-    <monochrome android:drawable="@mipmap/icon_monochrome"/>
 </adaptive-icon>
 """)
     elif args.icon_fg or args.icon_bg:
@@ -824,9 +822,6 @@ tools directory of the Android SDK.
                     help=('A png file to use as the foreground of the adaptive icon '
                           'for the application.'))
     ap.add_argument('--icon-bg', dest='icon_bg',
-                    help=('A png file to use as the background of the adaptive icon '
-                          'for the application.'))
-    ap.add_argument('--icon-adaptive', dest='icon_adaptive',
                     help=('A png file to use as the background of the adaptive icon '
                           'for the application.'))
     ap.add_argument('--service', dest='services', action='append', default=[],
