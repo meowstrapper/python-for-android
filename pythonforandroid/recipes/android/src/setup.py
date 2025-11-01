@@ -1,4 +1,4 @@
-from setuptools import setup, Extension
+from distutils.core import setup, Extension
 from Cython.Build import cythonize
 import os
 

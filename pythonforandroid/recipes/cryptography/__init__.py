@@ -5,9 +5,9 @@ from os.path import join
 class CryptographyRecipe(RustCompiledComponentsRecipe):
 
     name = 'cryptography'
-    version = '46.0.3'
+    version = '42.0.1'
     url = 'https://github.com/pyca/cryptography/archive/refs/tags/{version}.tar.gz'
-    depends = ['openssl', 'cffi']
+    depends = ['openssl']
 
     def get_recipe_env(self, arch, **kwargs):
         env = super().get_recipe_env(arch, **kwargs)
