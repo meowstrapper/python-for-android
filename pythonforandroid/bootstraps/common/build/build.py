@@ -826,6 +826,9 @@ tools directory of the Android SDK.
     ap.add_argument('--icon-bg', dest='icon_bg',
                     help=('A png file to use as the background of the adaptive icon '
                           'for the application.'))
+    ap.add_argument('--icon-adaptive', dest='icon_adaptive',
+                    help=('A png file to use as the background of the adaptive icon '
+                          'for the application.'))
     ap.add_argument('--service', dest='services', action='append', default=[],
                     help='Declare a new service entrypoint: '
                          'NAME:PATH_TO_PY[:foreground]')
